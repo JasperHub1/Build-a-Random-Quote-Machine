@@ -1,0 +1,44 @@
+body {
+	background-color: #333; 
+	font-weight: 700;
+	font-size: 1.75em;
+	font-family: 'Lato', sans-serif;
+}
+
+#container {
+	background-color: #fff; 
+	border: 1px solid;
+	margin: 8% auto auto auto;
+	width: 450px;
+	padding: 40px;
+	position: relative;
+	border-radius: 8px;
+	letter-spacing:	0.3px;
+}
+
+.text {
+	text-align: center;
+}
+
+.author {
+	margin-top: 20px;
+	font-size: 15px;
+	text-align: right;
+	clear: both;
+}
+
+.button {
+	padding: 30px 0 30px 0;
+}
+
+
+#new-quote {
+	margin: auto;
+	padding: 15px;
+	float: right;
+	border: none;
+	cursor: pointer;
+	color: white;
+	border-radius: 8px;
+	font-size: 16px;
+}

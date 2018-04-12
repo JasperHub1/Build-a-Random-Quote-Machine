@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="main.css" />
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,700" rel="stylesheet">
+
+
+</head>
+<body>
+	<div id="container">
+		<div class="text">
+			<span id="text"></span>
+		</div>
+		<div class="author">
+			<span id="author"></span>
+		</div>
+		<div class="button">
+			<button id="new-quote">New Quote</button>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+	<script>
+		var colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
+
+		function getQuote() {
+			$.ajax({
+				headers: {
+					"X-Mashape-Key": "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+					Accept: "application/json",
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=',
+				success: function(r) {
+					if (typeof r === 'string') {
+						r = JSON.parse(r); 
+					}
+
+					// $(selector).animate({params},speed,callback), opacity from 0 to 1;
+					$(".text").animate({
+						opacity: 0
+					}, 500,
+					function() {
+						$(this).animate({
+							opacity: 1
+						}, 500);
+						$('#text').text(r.quote);
+					});
+
+					$(".author").animate({
+						opacity: 0
+					}, 500,
+					function() {
+						$(this).animate({
+							opacity: 1
+						}, 500);
+						$('#author').html("-" + r.author);
+					});
+
+					// randomly genrate color; colors[index] to look for var color;
+					// need jquery-ui
+					var color = Math.floor(Math.random() * colors.length);
+					$("html body").animate({
+						backgroundColor: colors[color],
+						color: colors[color]
+					}, 1000);
+					$("#new-quote").animate({
+						backgroundColor: colors[color]
+					}, 1000);				
+
+				}
+			});
+		};
+
+		$(document).ready(function(){
+			getQuote();
+			$("#new-quote").on("click", function() {
+				getQuote();
+			});
+		});
+	</script>
+
+</body>
+</html>
